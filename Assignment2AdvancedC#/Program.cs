@@ -141,8 +141,155 @@ namespace Assignment2AdvancedC_
 
             #endregion
 
+            // 1. You are given an ArrayList containing a sequence of elements.
+            //try to reverse the order of elements in the ArrayList in-place(in the same arrayList) without using the built-in Reverse.
+            //Implement a function that takes the ArrayList as input and modifies it to have the reversed order of elements.
+            #region Part2 - Q1
+            //ArrayList list = new ArrayList() { 1, 2, 3, 4, 5 };
+
+            //Console.WriteLine("Original list");
+            //foreach (int i in list)
+            //{
+            //    Console.WriteLine(i);
+            //}
+
+            //ReverseArrayList(list);
+
+            //Console.WriteLine("\nReversed list");
+            //foreach (int i in list)
+            //{
+            //    Console.WriteLine(i);
+            //}
+            #endregion
+
+            // 2. You are given a list of integers.
+            //Your task is to find and return a new list containing only the even numbers from the given list.
+            #region Part2 - Q2
+            //List<int> numbers = new List<int>() { 1, 2, 3, 4, 5, };
+
+            //List<int> evenNumbers = GetEvenNumbers(numbers);
+
+            //Console.WriteLine("Original list");
+            //foreach (int num in numbers)
+            //{
+            //    Console.WriteLine(num);
+            //}
+
+            //Console.WriteLine("\nEven list");
+            //foreach(int num in evenNumbers)
+            //{
+            //    Console.WriteLine(num);
+            //}
+            #endregion
+
+            // 3. implement a custom list called FixedSizeList<T> with a predetermined capacity.
+            //This list should not allow more elements than its capacity
+            //and should provide clear messages if one tries to exceed it or access invalid indices
+            //Requirements:
+            //    1.Create a generic class named FixedSizeList<T>.
+            //    2.Implement a constructor that takes the fixed capacity of the list as a parameter.
+            //    3.Implement an Add method that adds an element to the list, but throws an exception if the list is already full.
+            //    4.Implement a Get method that retrieves an element at a specific index in the list but throws an exception for invalid indices.
+            #region Part2 - Q3
+            //int capacity = 5;
+            //FixedSizeList<int> fixedList = new FixedSizeList<int>(capacity);
+            //for (int i = 1; i <= capacity; i++)
+            //{
+            //    fixedList.Add(i);
+            //}
+
+            //// fixedList.Add(6); // this will throw exception
+
+            //Console.WriteLine("Elements in the list: ");
+            //for (int i = 0; i < fixedList.Count; i++)
+            //{
+            //    Console.WriteLine(fixedList.Get(i));
+            //} 
+            #endregion
+
+            //
+            // 4.Given a string, find the first non - repeated character in it and return its index.
+            //If there is no such character, return -1.Hint you can use dictionary
+            #region Part2 - Q4
+            //string input = "sswiss";
+            //int index = FirstNonRepeatedCharIndex(input);
+            //Console.WriteLine(index); // Output should be 2 (character 'w' at index 2)
+
+            //input = "tterr";
+            //index = FirstNonRepeatedCharIndex(input);
+            //Console.WriteLine(index); // Output should be 2 (character 'e' at index 2)
+
+            //input = "aabbcc";
+            //index = FirstNonRepeatedCharIndex(input);
+            //Console.WriteLine(index); // Output should be -1 (no non-repeated character)
+            #endregion
+
+
+        }
+        static void ReverseArrayList(ArrayList list)
+        {
+            int left = 0;
+            int right = list.Count - 1;
+
+            while (left < right)
+            {
+                var temp = list[left];
+                list[left] = list[right];
+                list[right] = temp;
+
+                left++;
+                right--;
+            }
         }
 
+        static List<int> GetEvenNumbers(List<int> nums)
+        {
+            List<int> evenNumbers = new List<int>();
+
+            foreach (int num in nums)
+            {
+                if (num % 2 == 0)
+                {
+                    evenNumbers.Add(num);
+                }
+            }
+            return evenNumbers;
+        }
+
+        static int FirstNonRepeatedCharIndex(string input)
+        {
+            // Dictionary to store character counts and their first occurrence index
+            Dictionary<char, int> charCount = new Dictionary<char, int>();
+            Dictionary<char, int> charIndex = new Dictionary<char, int>();
+
+            // Traverse the string and fill the dictionaries
+            for (int i = 0; i < input.Length; i++)
+            {
+                char c = input[i];
+                if (charCount.ContainsKey(c))
+                {
+                    charCount[c]++;
+                }
+                else
+                {
+                    charCount[c] = 1;
+                    charIndex[c] = i;
+                }
+            }
+
+            // Find the first non-repeated character
+            for (int i = 0; i < input.Length; i++)
+            {
+                char c = input[i];
+                if (charCount[c] == 1)
+                {
+                    return charIndex[c];
+                }
+            }
+
+            // If no non-repeated character is found, return -1
+            return -1;
+        }
 
     }
 }
