@@ -224,8 +224,8 @@ namespace Assignment2AdvancedC_
             //Console.WriteLine(index); // Output should be -1 (no non-repeated character)
             #endregion
 
-        }
 
+        }
         static void ReverseArrayList(ArrayList list)
         {
             int left = 0;
@@ -290,5 +290,6 @@ namespace Assignment2AdvancedC_
             // If no non-repeated character is found, return -1
             return -1;
         }
+
     }
 }
